@@ -1,0 +1,7 @@
+Data: 16/09/2020
+
+* Servidor Escutando na Porta 8080
+* Requisições do Cliente 
+1 - http://localhost:8080/index.html
+2 - http://localhost:8080/rede-Orange.jpg
+3 - http://localhost:8080/gif1.gif
