@@ -6,7 +6,7 @@ import java.net.Socket;
 public class WebServerTest {
     public static void main(String[] args) throws Exception{
 
-        ServerSocket server = new ServerSocket(5001);
+        ServerSocket server = new ServerSocket(3002);
         System.out.println("Iniciando Servidor");
 
         while (true) {

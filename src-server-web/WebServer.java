@@ -52,7 +52,6 @@ final class HTTPRequest implements Runnable {
         tokens.nextToken();
         String fileName = tokens.nextToken();
 
-
         fileName = "." + fileName;
 
 
@@ -61,6 +60,7 @@ final class HTTPRequest implements Runnable {
 
         try {
             fis = new FileInputStream(fileName);
+            System.out.println("FILE NAME: "+fileName);
         } catch (FileNotFoundException e) {
             fileExists = false;
         }
@@ -74,8 +74,8 @@ final class HTTPRequest implements Runnable {
             contentTypeLine = "Content-Type: " + contentType(fileName) + CRLF;
         } else {
 
-
-            statusLine = CRLF+ "HTTP/1.1 404 NOT FOUND" + CRLF;
+            System.out.println("NÂO TEMM");
+            statusLine = CRLF + "HTTP/1.1 404 NOT FOUND" + CRLF;
 
 
             contentTypeLine = "Content-Type: " + contentType(fileName) + CRLF;
@@ -101,7 +101,6 @@ final class HTTPRequest implements Runnable {
 
             os.writeBytes(entityBody);
 
-
         }
 
         os.flush();
@@ -110,7 +109,6 @@ final class HTTPRequest implements Runnable {
         socket.close();
 
     }
-
 
 
     private static void sendBytes(FileInputStream fis, OutputStream os) throws Exception {
