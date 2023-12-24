@@ -1,34 +1,9 @@
 package br.com.trabalhoredes.server;
 
 import java.io.*;
-import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.StringTokenizer;
 
-
-public final class WebServer {
-
-    public static void main(String[] args) throws Exception{
-
-
-            ServerSocket server = new ServerSocket(5000);
-            System.out.println("Iniciando Servidor");
-
-            while (true) {
-                Socket client = server.accept();
-
-                 HTTPRequest request = new HTTPRequest(client);
-
-                System.out.println("Cliente Conectado");
-
-                Thread t1 = new Thread(request);
-                t1.start();
-
-            }
-
-    }
-
-}
 final class HTTPRequest implements Runnable {
 
     Socket socket;
@@ -44,7 +19,7 @@ final class HTTPRequest implements Runnable {
         try {
             processRequest();
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println();
         }
     }
 
@@ -67,7 +42,7 @@ final class HTTPRequest implements Runnable {
         System.out.println(requestLine);
 
         // Obter e exibir as linhas de cabeçalho da requisição
-        String headerLine = null;
+        String headerLine;
         while ((headerLine = br.readLine()).length() != 0) {
             System.out.println(headerLine);
         }
@@ -90,8 +65,8 @@ final class HTTPRequest implements Runnable {
             fileExists = false;
         }
 
-        String statusLine = null;
-        String contentTypeLine = null;
+        String statusLine;
+        String contentTypeLine;
         String entityBody = null;
 
         if (fileExists) {
@@ -141,7 +116,7 @@ final class HTTPRequest implements Runnable {
     private static void sendBytes(FileInputStream fis, OutputStream os) throws Exception {
 
         byte[] buffer = new byte[1024];
-        int bytes = 0;
+        int bytes;
 
         while ((bytes = fis.read(buffer)) != -1) {
             os.write(buffer, 0, bytes);
